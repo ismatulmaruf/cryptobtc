@@ -14,3 +14,16 @@ export default function RequireAuth({ allowedRoles }) {
     <Navigate to="/login" />
   );
 }
+
+export function RequireSubs() {
+  const { role, isLoggedIn, data } = useSelector((state) => state.auth);
+  // const location = useLocation();
+
+  return isLoggedIn && data.subscription ? (
+    <Outlet />
+  ) : isLoggedIn ? (
+    <Navigate to="/denied" />
+  ) : (
+    <Navigate to="/login" />
+  );
+}

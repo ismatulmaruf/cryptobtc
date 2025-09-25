@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        customBg: "#B3E5FC",
+        customBg: "#20344B",
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],

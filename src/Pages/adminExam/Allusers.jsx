@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../Layout/Layout";
+import AddRemovePoint from "../../Components/AddRemovePoint";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const AllUsers = () => {
@@ -113,7 +114,8 @@ const AllUsers = () => {
 
   return (
     <Layout>
-      <div className="container mx-auto min-h-screen p-4 dark:bg-gray-900 dark:text-white bg-gray-50 text-gray-800 ">
+      <div className="container mx-auto min-h-screen p-4  ">
+        {/* <AddRemovePoint /> */}
         {loading ? (
           <div className="flex justify-center items-center h-screen">
             <ClipLoader
@@ -123,18 +125,18 @@ const AllUsers = () => {
           </div>
         ) : (
           <>
-            <div className="mb-4">
+            <div className="mb-4 text-gray-50">
               <p className="text-lg font-semibold">Total Users: {totalUsers}</p>
               <p className="text-lg font-semibold">
                 Total Admins: {totalAdmins}
               </p>
-              <p className="text-lg font-semibold">
+              {/* <p className="text-lg font-semibold">
                 Total Instructors: {totalInstructors}
-              </p>
+              </p> */}
             </div>
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200 bg-white dark:bg-gray-800 shadow-md rounded-lg">
-                <thead className={`bg-gray-200 dark:bg-gray-700`}>
+              <table className="min-w-full divide-y divide-gray-200  dark:bg-gray-800 shadow-md rounded-lg text-gray-50">
+                <thead className={` dark:bg-gray-700`}>
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
                       Name
@@ -146,6 +148,9 @@ const AllUsers = () => {
                       Phone
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+                      USDT
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
                       Role
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
@@ -155,15 +160,18 @@ const AllUsers = () => {
                 </thead>
                 <tbody className={`divide-y divide-gray-200`}>
                   {users.map((user) => (
-                    <tr key={user._id} className={`bg-white dark:bg-gray-900`}>
+                    <tr key={user._id} className={` dark:bg-gray-900`}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         {user.fullName}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm">
                         {user.email}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm">
                         {user.phone}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm">
+                        {user.point.toFixed(2)}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <select
@@ -171,17 +179,25 @@ const AllUsers = () => {
                           onChange={(e) =>
                             updateUserRole(user._id, e.target.value)
                           }
-                          className="bg-gray-50 dark:bg-gray-800 border border-gray-300 rounded-md py-1 px-2 dark:border-gray-600 dark:text-gray-200"
+                          className="dark:bg-gray-800 border border-gray-300 rounded-md py-1 px-2 dark:border-gray-600 dark:text-gray-200"
+                          disabled={user.role === "SADMIN"} // Disable if role is SADMIN
                         >
                           <option value="USER">User</option>
                           <option value="ADMIN">Admin</option>
-                          <option value="INSTRUCTOR">Instructor</option>
+                          {/*  */}
+                          {/* <option value="INSTRUCTOR">Instructor</option> */}
                         </select>
                       </td>
+
                       <td className="px-6 py-4 whitespace-nowrap">
                         <button
                           onClick={() => deleteUser(user._id)}
-                          className="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700"
+                          className={`py-1 px-2 rounded-md ${
+                            user.role === "SADMIN"
+                              ? "bg-gray-400 text-gray-600 cursor-not-allowed"
+                              : "bg-red-500 text-white hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700"
+                          }`}
+                          disabled={user.role === "SADMIN"} // Disable button if role is SADMIN
                         >
                           Delete
                         </button>

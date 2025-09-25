@@ -37,7 +37,7 @@ export default function ForgotPassword() {
           onSubmit={onForgotPassword}
           autoComplete="off"
           noValidate
-          className="flex flex-col dark:bg-gray-800 gap-4 rounded-lg md:py-5 py-7 md:px-7 px-3 md:w-[500px] w-full shadow-custom dark:shadow-xl  "
+          className="flex flex-col border border-2 border-[#00D084] bg-[#0A1018] gap-4 rounded-lg md:py-5 py-7 md:px-7 px-3 md:w-[500px] w-full shadow-custom dark:shadow-xl  "
         >
           <h1 className="text-center dark:text-purple-500 text-4xl font-bold font-inter">
             Forgot Password Page
@@ -63,7 +63,7 @@ export default function ForgotPassword() {
           </button>
 
           {/* link */}
-          <p className="text-center font-inter text-gray-500 dark:text-slate-300">
+          <p className="text-center font-inter text-gray-100 dark:text-slate-300">
             Back to profile ?{" "}
             <Link
               to="/user/profile"

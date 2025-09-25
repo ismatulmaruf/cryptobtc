@@ -1,66 +1,77 @@
 import React from "react";
-import aboutMainImage from "../assets/images/about.png";
-import CarouselSlide from "../Components/CarouselSlide";
-import { celebrities } from "../Constants/CelebrityData";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import Layout from "../Layout/Layout";
+import { Link } from "react-router-dom";
 
-function AboutUs() {
-  const settings = {
-    dots: true,
-    screenY: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    lazyLoading: true,
-    autoplay: true,
-    speed: 500,
-  };
-
+const About = () => {
   return (
     <Layout>
-      <section className="md:py-10 py-7  text-white overflow-x-hidden  md:px-16 px-6 min-h-[100vh] dark:bg-gray-900">
-        {/* hero */}
-        <div className="flex md:flex-row flex-col-reverse items-center justify-center md:gap-10 gap-7 w-full space-y-7">
-          <div className="md:w-1/2 w-full space-y-7">
-            <h1 className="text-5xl text-yellow-500 font-semibold font-inter">
-              Affordable and{" "}
-              <span className="font-nunito-sans">quality education</span>
+      <div className="bg-gray-900 text-white min-h-screen">
+        {/* Hero Section */}
+        <div className="relative w-full h-[60vh] md:h-[75vh] flex items-center justify-center">
+          <img
+            src="https://i.imgur.com/9VPz64q.jpeg"
+            alt="Crypto Gold Minings"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+          <div className="relative z-10 text-center">
+            <h1 className="text-4xl md:text-6xl font-bold text-yellow-500">
+              Crypto Gold Minings (CGM)
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-200 font-nunito-sans">
-              Our goal is to provide the afoordable and quality education to the
-              world. We are providing the platform for the aspiring teachers and
-              students to share their skills, creativity and knowledge to each
-              other to empower and contribute in the growth and wellness of
-              mankind.
+            <p className="mt-4 text-lg md:text-xl text-gray-300">
+              Your trusted partner in cryptocurrency exchange and investment.
+            </p>
+          </div>
+        </div>
+
+        {/* About Content Section */}
+        <div className="flex flex-col items-center py-12 px-4">
+          <div className="w-full md:w-2/3 text-center">
+            <h2 className="text-2xl font-semibold text-yellow-400 mb-4">
+              Our Mission
+            </h2>
+            <p className="text-gray-300 leading-7">
+              Our mission is to simplify the process of cryptocurrency exchange
+              and investment, making it accessible to everyone, from beginners
+              to seasoned traders. With a focus on security, transparency, and
+              innovation, CGM strives to create a seamless experience for all
+              our users.
+            </p>
+            <p className="text-gray-300 leading-7 mt-4">
+              Whether you're looking to exchange crypto, invest for long-term
+              growth, or explore new earning avenues in the digital asset space,
+              Crypto Gold Minings is here to guide you every step of the way.
             </p>
           </div>
 
-          <div className="md:w-1/2 w-1/7 flex items-center justify-center">
-            <img
-              style={{
-                filter: "drop-shadow(0px 15px 10px rgb(0,0,0));",
-              }}
-              alt="about main image"
-              className="drop-shadow-2xl"
-              src={aboutMainImage}
-            />
+          {/* Contact Section */}
+          <div className="w-full md:w-2/3 mt-12 text-center">
+            <h2 className="text-2xl font-semibold text-yellow-400 mb-4">
+              Get in Touch
+            </h2>
+            <p className="text-gray-300 leading-7 mb-10">
+              Have a plan or need assistance? Contact us today to discuss your
+              investment goals, exchange needs, and how we can help you succeed
+              in the world of cryptocurrency.
+            </p>
+            <Link
+              to="/contact"
+              className=" px-6 py-3 bg-yellow-500 text-gray-900 font-bold rounded-full shadow-md hover:bg-yellow-600"
+            >
+              Contact Us
+            </Link>
+          </div>
+
+          {/* Footer */}
+          <div className="mt-16 text-center">
+            <p className="text-sm text-gray-500">
+              Start your journey with CGM – where crypto meets opportunity.
+            </p>
           </div>
         </div>
-
-        {/* slider */}
-
-        <div className="w-[90vw] px-0 pt-7 mt-10 rounded-lg bg-[#dc85ffb4] dark:bg-[#393d4e93] backdrop-blur-lg md:h-[350px] h-[550px] ">
-          <Slider {...settings} className="h-full">
-            {celebrities.map((details, index) => (
-              <CarouselSlide details={details} key={index} />
-            ))}
-          </Slider>
-        </div>
-      </section>
+      </div>
     </Layout>
   );
-}
+};
 
-export default AboutUs;
+export default About;

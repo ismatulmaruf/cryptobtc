@@ -6,13 +6,18 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { FiMenu } from "react-icons/fi";
 import {
   FaHome,
+  FaInfoCircle,
   FaUserCircle,
   FaPlus,
   FaList,
-  FaInfoCircle,
+  FaShareSquare,
   FaPhone,
-  FaTag,
+  FaShare,
   FaUserAlt,
+  FaTh,
+  FaTag,
+  FaVideo,
+  FaVideoSlash,
 } from "react-icons/fa";
 
 export default function Sidebar({ hideBar = false }) {
@@ -20,6 +25,7 @@ export default function Sidebar({ hideBar = false }) {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const { isLoggedIn, role, data } = useSelector((state) => state.auth);
+  // console.log(data.subscription);
 
   const onLogout = async function () {
     await dispatch(logout());
@@ -46,7 +52,7 @@ export default function Sidebar({ hideBar = false }) {
         <div className="drawer-content">
           <label
             htmlFor="my-drawer"
-            className="cursor-pointer fixed top-0 left-3 border border-gray-100 shadow-lg rounded-md mt-3 ml-2 "
+            className="cursor-pointer fixed top-0 right-3 border border-gray-100 shadow-lg rounded-md mt-3 ml-2 "
           >
             <FiMenu
               onClick={changeWidth}
@@ -55,79 +61,132 @@ export default function Sidebar({ hideBar = false }) {
             />
           </label>
         </div>
-
         <div className="drawer-side  w-0 shadow-custom dark:shadow-lg">
           <label
             htmlFor="my-drawer"
             className="drawer-overlay w-screen"
           ></label>
-          <ul className="menu  p-4 pt-7 h-[100%] min-w-[250px] max-w-[350px]  bg-white dark:bg-[#29303ea3] backdrop-blur-[8px] text-gray-500 font-inter dark:text-slate-50 md:text-[17px] text-base font-[600] relative">
+          <ul className="menu  p-4 pt-7 h-[100%] min-w-[250px] max-w-[350px]  bg-[#20344B] dark:bg-[#29303ea3] backdrop-blur-[8px] text-gray-500 font-inter dark:text-slate-50 md:text-[17px] text-base font-[600] relative">
             <li className="w-fit absolute right-2 z-50 text-red-500">
               <button onClick={hideDrawer}>
                 <AiFillCloseCircle size={28} />
               </button>
             </li>
             <li>
-              <Link to="/" className="flex gap-4 items-center">
+              <Link to="/" className="flex gap-4 items-center text-gray-100">
                 <FaHome
                   size={18}
-                  className="text-gray-500 dark:text-slate-100"
+                  className="text-gray-100 dark:text-slate-100"
                 />
                 Home
               </Link>
             </li>
+            <li>
+              <Link
+                to="/allpackage"
+                className="flex gap-4 items-center text-gray-100"
+              >
+                <FaTh size={18} className="text-gray-100 dark:text-slate-100" />
+                All Packages
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/blog"
+                className="flex gap-4 items-center text-gray-100"
+              >
+                <FaList
+                  size={18}
+                  className="text-gray-100 dark:text-slate-100"
+                />
+                Blog
+              </Link>
+            </li>
 
-            {role === "ADMIN" && (
+            {(role === "ADMIN" || role == "SADMIN") && (
               <>
                 <li>
                   <Link
-                    to="/admin/dashboard"
-                    className="flex gap-4 items-center"
+                    to="/allusers"
+                    className="flex gap-4 items-center text-gray-100"
                   >
-                    <FaUserCircle
-                      size={18}
-                      className="text-gray-500 dark:text-slate-100"
-                    />
-                    Admin DashBoard
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/allusers" className="flex gap-4 items-center">
                     <FaUserAlt
                       size={18}
-                      className="text-gray-500 dark:text-slate-100"
+                      className="text-gray-100 dark:text-slate-100"
                     />
                     Users
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    to="/adminvideo"
+                    className="flex gap-4 items-center text-gray-100"
+                  >
+                    <FaVideo
+                      size={18}
+                      className="text-gray-100 dark:text-slate-100"
+                    />
+                    Add Video
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/admin/withdraw"
+                    className="flex gap-4 items-center text-gray-100"
+                  >
+                    <FaShare
+                      size={18}
+                      className="text-gray-100 dark:text-slate-100"
+                    />
+                    Admin Withdraw
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/admin/deposit"
+                    className="flex gap-4 items-center text-gray-100"
+                  >
+                    <FaShareSquare
+                      size={18}
+                      className="text-gray-100 dark:text-slate-100"
+                    />
+                    Admin Deposit
+                  </Link>
+                </li>
               </>
             )}
-            {(role === "ADMIN" || role == "INSTRUCTOR") && (
-              <li>
-                {/* <Link to="/allExamCatAdmin" className="flex gap-4 items-center">
-                  <FaPlus
-                    size={18}
-                    className="text-gray-500 dark:text-slate-100"
-                  />
-                  Add Exam
-                </Link> */}
-              </li>
+
+            {role == "ADMIN" && (
+              <>
+                <li>
+                  <Link
+                    to="/adminCode"
+                    className="flex gap-4 items-center text-gray-100"
+                  >
+                    <FaPlus
+                      size={18}
+                      className="text-gray-100 dark:text-slate-100"
+                    />
+                    Add Code
+                  </Link>
+                </li>
+              </>
             )}
 
-            {role === "ADMIN" && (
+            {data.subscription && (
               <>
-                {/* <li>
+                <li>
                   <Link
-                    to="/category/create"
-                    className="flex gap-4 items-center"
+                    to="/video"
+                    className="flex gap-4 items-center text-gray-100"
                   >
-                    <FaTag
+                    <FaVideo
                       size={18}
-                      className="text-gray-500 dark:text-slate-100"
+                      className="text-gray-100 dark:text-slate-100"
                     />
-                    Category
+                    Video
                   </Link>
-                </li> */}
+                </li>
               </>
             )}
             {/* <li>
@@ -143,21 +202,80 @@ export default function Sidebar({ hideBar = false }) {
               </Link>
             </li> */}
 
+            {isLoggedIn && (
+              <>
+                <li>
+                  <Link
+                    to="/user/transfer"
+                    className="flex gap-4 items-center text-gray-100"
+                  >
+                    <FaShare
+                      size={18}
+                      className="text-gray-100 dark:text-slate-100"
+                    />
+                    Transfer
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    to="/user/deposit"
+                    className="flex gap-4 items-center text-gray-100"
+                  >
+                    <FaPlus
+                      size={18}
+                      className="text-gray-100 dark:text-slate-100"
+                    />
+                    Deposit
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/user/package"
+                    className="flex gap-4 items-center text-gray-100"
+                  >
+                    <FaPlus
+                      size={18}
+                      className="text-gray-100 dark:text-slate-100"
+                    />
+                    Package
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/user/withdraw"
+                    className="flex gap-4 items-center text-gray-100"
+                  >
+                    <FaShareSquare
+                      size={18}
+                      className="text-gray-100 dark:text-slate-100"
+                    />
+                    Withdraw
+                  </Link>
+                </li>
+              </>
+            )}
             <li>
-              <Link to="/contact" className="flex gap-4 items-center">
+              <Link
+                to="/contact"
+                className="flex gap-4 items-center text-gray-100"
+              >
                 <FaPhone
                   size={18}
-                  className="text-gray-500 dark:text-slate-100"
+                  className="text-gray-100 dark:text-slate-100"
                 />
                 Contact Us
               </Link>
             </li>
 
             <li>
-              <Link to="/about" className="flex gap-4 items-center">
+              <Link
+                to="/about"
+                className="flex gap-4 items-center text-gray-100"
+              >
                 <FaInfoCircle
                   size={18}
-                  className="text-gray-500 dark:text-slate-100"
+                  className="text-gray-100 dark:text-slate-100"
                 />
                 About Us
               </Link>

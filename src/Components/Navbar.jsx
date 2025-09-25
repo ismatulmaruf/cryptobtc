@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import logo from "../assets/images/logo.png";
 
 export default function Navbar() {
   // const [darkMode, setDarkMode] = useState(() => {
@@ -36,18 +38,20 @@ export default function Navbar() {
   }, [darkMode]);
 
   return (
-    <nav className="sticky top-0 z-50 md:h-[72px] h-[65px] md:px-[35px] px-[15px] bg-[#B3E5FCb0] dark:bg-[#21242bc5] shadow-lg backdrop-blur-lg flex justify-end">
-      {/* <button className="p-5 rounded-full text-lg font-semibold">
-      {darkMode ? (
-        <FaSun size={26} className="text-white" onClick={toggleDarkMode} />
-      ) : (
-        <FaMoon
-          size={26}
-          className="text-gray-900"
-          onClick={toggleDarkMode}
-        />
-      )}
-    </button> */}
+    <nav className="sticky top-0 z-50 md:h-[72px] h-[65px] md:px-[35px] px-[15px] bg-[#20344B] dark:bg-[#21242bc5] shadow-lg backdrop-blur-lg flex justify-start">
+      <Link
+        to="/"
+        className="p-3 rounded-full font-semibold flex items-center justify-center  transition duration-300"
+        aria-label="Home"
+      >
+        <div className="logo text-center flex items-center justify-center">
+          <img
+            src={logo}
+            alt="Company Logo"
+            className="h-12 w-auto object-contain"
+          />
+        </div>
+      </Link>
     </nav>
   );
 }
